@@ -2,9 +2,15 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.young.web.user">
+<mapper namespace="com.young.web.member">
 	
+	<insert id="insertMember">
+		insert into member(userid,password) value(#{userid},#{password})
+	</insert>
 	
+	<select id="getMember" resultType="com.young.web.member.model.MemberVO" >
+		select * from member where userid = #{userid}
+	</select>
 	
 	
 </mapper>
