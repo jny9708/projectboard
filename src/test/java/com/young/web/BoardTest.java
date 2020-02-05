@@ -1,5 +1,7 @@
 package com.young.web;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -21,20 +23,26 @@ public class BoardTest {
 	@Inject
 	BoardDAO boardDAO;
 	
-	@Test
+	//@Test
 	public void insertBoard() {
 		BoardVO boardVO = new BoardVO();
-		for(int i =5; i<10; i++) {
+		for(int i =10; i<50; i++) {
 			boardVO.setTitle(i+"번째 게시물입니다.");
 			boardVO.setContent(i+"번째 게시물 내용입니다.");
 			boardVO.setMember_id(1);
 			boardDAO.insertBoard(boardVO);
 		}
-		
-		
-		
-		
-		
 	}
+	
+	//@Test
+//	public void getBoardList() {
+//		List<BoardVO> list = boardDAO.getBoardList();
+//		
+//		for(int i=0; i<list.size(); i++) {
+//			System.out.println(list.get(i).getRegister_date());
+//			System.out.println(list.get(i).getRegister_date().getClass());
+//		}
+//		
+//	}
 	
 }

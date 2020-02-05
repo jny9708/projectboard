@@ -11,10 +11,10 @@ public class BoardVO {
 	int id;
 	String title;
 	String content;
-	Date register_date;
-	Date edit_date;
+	String register_date;
+	String edit_date;
 	int member_id;
 	int view_count;
 	int comment_count;
-
+	String userid;
 }

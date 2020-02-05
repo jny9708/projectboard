@@ -37,5 +37,11 @@ public class LoginController {
 			return "redirect:/login";
 		}
 	}
+	
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 
 }

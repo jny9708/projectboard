@@ -6,4 +6,30 @@
 	<insert id="insertBoard">
 		insert into board(title,content,member_id) value(#{title},#{content},#{member_id})
 	</insert>
+	
+	<select id="getBoardList" resultType="com.young.web.board.model.BoardVO">
+		select board.id,board.title,member.userid,board.view_count,board.register_date 
+			from board join member on member.id = board.member_id order by id desc limit #{startBoardNum},#{perPageBoardNum};
+	</select>
+	
+	<select id="getBoardDetail" resultType="com.young.web.board.model.BoardVO">
+		select board.* ,member.userid 
+			from board join member on board.member_id = member.id where board.id = #{id};
+	</select>
+	
+	<delete id="deleteBoard">
+		delete from board where id = #{id}
+	</delete>
+	
+	<select id="getTotalBoardCnt" resultType="int">
+		select count(*) from board
+	</select>
+	
+	<update id="addViewCnt">
+		update board set view_count = view_count + 1 where id = #{id}
+	</update>
+	
+	<update id="updateBoard">
+		update board set title = #{title} ,content = #{content} where id = #{id}
+	</update>
 </mapper>

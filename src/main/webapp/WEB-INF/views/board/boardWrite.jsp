@@ -33,6 +33,19 @@
 </style>
 <script type="text/javascript">
 
+var modify = '${modify}';
+
+$(function(){
+	if(modify=='true'){
+		$("#formId").attr('action', '<c:url value="/board/modify"/>');
+		$('input[name=title]').val('${boardVO.title}');
+		$("textarea[name=content]").text('${boardVO.content}');
+		$('input[name=member_id]').val('${boardVO.id}');
+		$('input[name=member_id]').attr('name','id')	
+		$('.btn-block').html('게시글 수정');
+	}
+});
+
 function submitcheck() {
 	var title = $('input[name=title]').val();
 	var content = $('input[name=content]').val();
@@ -49,7 +62,7 @@ function submitcheck() {
 	<h2>게시글 작성</h2>
     <div class="l-container">
     
-        <form action="<c:url value="/board/add"/>" method="POST" onsubmit="return submitcheck()">   
+        <form id="formId" action="<c:url value="/board/add"/>" method="POST" onsubmit="return submitcheck()">   
         <table class="table table-bordered">
             <tbody>
             <input type="hidden" name="member_id" value="${member.id}"/>
