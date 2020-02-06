@@ -19,14 +19,17 @@ public class LoginInterceptorHandler extends HandlerInterceptorAdapter {
  
 
         if(memberVO == null){
-        	
+        	if(request.getRequestURI().contains("comment")&&request.getMethod().equals("GET")) {
+        		return true;
+        	}
+        	System.out.println(request.getMethod());
         	String url = request.getContextPath()+"/login";
             response.sendRedirect(url);
             return false;
         }
 
-        
         return true;
+        
 	}
 	
 	 @Override

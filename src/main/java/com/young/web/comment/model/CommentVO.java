@@ -1,19 +1,17 @@
-package com.young.web.board.model;
-
-import java.util.Date;
+package com.young.web.comment.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
-public class BoardVO {
+@Getter
+public class CommentVO {
+	
 	int id;
-	String title;
+	int board_id;
+	int member_id;
 	String content;
 	String register_date;
 	String edit_date;
-	int member_id;
-	int view_count;
 	String userid;
 }
