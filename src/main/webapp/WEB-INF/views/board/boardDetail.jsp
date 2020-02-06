@@ -144,9 +144,6 @@
 	   });
 	   
 	   
-	   
-	  	
-	   
 	   $('#btnCommentInsert').click(function(){
 		   if('${member}'==''){
 			   var url = '<c:url value="/login"/>';
@@ -260,19 +257,7 @@
 	            </div>
         </div>
         <div class="c-container cmt-list">
-           
-          <!--   <div>
-                <span>skdud5606</span>
-                <div style="padding: 20px 0px;">
-                    댓글내용입니다.
-                </div>
-                <span style="padding-bottom: 10px; border-bottom: 1px solid #e6e6e6;" >
-                    2020.02.05 12:22:22
-                </span>
-                <button type="button" class="btn btn-sm btn-primary" id="">수정</button>
-                <button type="button" class="btn btn-sm btn-primary" id="">삭제</button>
-            </div> -->
-            
+         
         </div>   
         
         <div>
