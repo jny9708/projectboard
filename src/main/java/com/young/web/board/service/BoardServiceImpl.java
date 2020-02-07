@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.young.web.board.dao.BoardDAO;
 import com.young.web.board.model.BoardVO;
 import com.young.web.common.Pagination;
+import com.young.web.common.XSSProtection;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -18,6 +19,10 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int insertBoard(BoardVO boardVO) {
+		
+		XSSProtection XSSProtection = new XSSProtection();
+		boardVO.setContent(XSSProtection.replaceParameter(boardVO.getContent()));
+		boardVO.setTitle(XSSProtection.replaceParameter(boardVO.getTitle()));
 		return boardDAO.insertBoard(boardVO);
 	}
 
@@ -48,6 +53,9 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int updateBoard(BoardVO boardVO) {
+		XSSProtection XSSProtection = new XSSProtection();
+		boardVO.setContent(XSSProtection.replaceParameter(boardVO.getContent()));
+		boardVO.setTitle(XSSProtection.replaceParameter(boardVO.getTitle()));
 		return boardDAO.updateBoard(boardVO);
 	}
 

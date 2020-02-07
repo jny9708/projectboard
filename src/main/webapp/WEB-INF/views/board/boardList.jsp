@@ -50,28 +50,24 @@
 	});
 	
 
-	function pagination(page, range, rangeSize){
+	function pagination(page, rangeSize){
 		var url = '<c:url value="/"/>';
 		url = url + "?page=" + page;
-		url = url + "&range=" + range;
 		location.href = url;
 	}
 	
-	function fn_next(page, range, rangeSize){
-		var page = parseInt((range * rangeSize)) + 1; //그 다음 블럭의 첫페이지를 계산한다.
-		var range = parseInt(range) + 1; //다음 블럭으로 옮겨야하니 블럭 +1
+	function fn_next(){
+		var page = ${pagination.endPage} + 1;
 		var url = '<c:url value="/"/>';
 		url = url + "?page=" + page;
-		url = url + "&range=" + range;
 		location.href = url;
 	}
 
-	function fn_prev(page, range, rangeSize){
-		var page = ((range - 2) * rangeSize) + 1; //그 전 블럭의 첫페이지를 계산한다.
-		var range = range - 1;	//그 전 블럭으로 옮겨야하니 블럭 -1
+	function fn_prev(){
+		var page = ${pagination.startPage} - 1; //그 전 블럭의 첫페이지를 계산한다.
 		var url = '<c:url value="/"/>';
 		url = url + "?page=" + page;
-		url = url + "&range=" + range;
+		console.log(url);
 		location.href = url;
 	}
 	
@@ -125,18 +121,18 @@
 		  <ul class="pagination">
 		  <c:if test="${pagination.prev}">
 		   <li class="page-item">
-		   		<a class="page-link" href="#" onclick="fn_prev('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
+		   		<a class="page-link" href="#" onclick="fn_prev()">
 		   		&lt;
 		   		</a>
 		   </li>
 		    </c:if>
 		    <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-		    	<li class="page-item"><a href="#" onclick="pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')" class="page-link <c:out value="${pagination.page == idx ? 'active' : ''}"/>">${idx}</a></li>
+		    	<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/>"><a href="#" onclick="pagination('${idx}', '${pagination.rangeSize}')" class="page-link">${idx}</a></li>
 		    </c:forEach>
 		    
 		    <c:if test="${pagination.next}">
 			    <li class="page-item">
-			      <a  class="page-link"  href="#" onclick="fn_next('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
+			      <a  class="page-link"  href="#" onclick="fn_next()">
 			        <span aria-hidden="true">&gt;</span>
 			      </a>
 			    </li>

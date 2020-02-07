@@ -66,23 +66,28 @@
    var member_id ='${member.id}';
    
    $(function(){
+	   //dom이 다 만들어지면 ajax를 이용해 댓글을 가져와서 뿌림
 	   showCommentList();
 	   
+	   //게시글 수정버튼 클릭 함수 
 	   $('#btnUpdate').click(function(){
 		   var url = '<c:url value="/board/modify/"/>'+${boardVO.id};
 		   location.href = url;
 	   });
-	   
+		
+	   //게시글 삭제버튼 클릭 함수
 	   $('#btnDelete').click(function(){
 		   var url = '<c:url value="/board/delete/"/>'+${boardVO.id};
 		   location.href = url;
 	   });
 	   
+	   //게시글 목록버튼 클릭 함수
 	   $('#btnList').click(function(){
 		   var url = '<c:url value="/"/>';
 		   location.href = url;
 	   });
 	   
+	   //댓글 삭제버튼 클릭 함수 (댓글 삭제버튼은 동적으로 생성되기 때문에 on click함수를 이용해야한다.)
 	   $(document).on("click","#btnCmtDelete",function(e){
 		   var cmdid = e.target.parentElement.id;
 			
@@ -91,8 +96,8 @@
 				type : 'DELETE',
 				dataType : "json",
 				success : function(data){
-					alert("댓글이 삭제되었습니다.");
 					showCommentList();
+					alert("댓글이 삭제되었습니다.");
 				},
 				error:function(request,status,error){
 					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -100,6 +105,7 @@
 			  });
 	   });
 	   
+	   //댓글 수정버튼 클릭 함수(댓글 삭제 버튼과 마찬가지)
 	   $(document).on("click","#btnCmtUpdate",function(e){
 		   var element = e.target.parentElement;
 		   var text = $(element.children.comment).text();
@@ -118,6 +124,7 @@
 		   
 	   });
 	   
+	   //댓글 수정버튼 클릭 함수
 	   $(document).on("click","#btnCommentmodify",function(e){
 		   var element = e.target.parentElement;
 		   var id = element.id;
@@ -143,18 +150,16 @@
 		   
 	   });
 	   
-	   
+	   //댓글 등록버튼 클릭 함수
 	   $('#btnCommentInsert').click(function(){
+		   //로그인이 안되어있다면 로그인 페이지로 이동 아니라면 ajax를 통해 json데이터를 서버로 전송 (post요청)
 		   if('${member}'==''){
 			   var url = '<c:url value="/login"/>';
 			   var result = confirm('로그인을 해주세요.');
 			   if(result){
 				   location.href=url;   
-			   }
-			   
-		   }else{
-			   console.log('asd');
-			   
+			   }   
+		   }else{			   
 			   member_id = '${member.id}'; 
 			   var dataParam = {'content': $('textarea[name=content]').val(),'member_id':member_id,'board_id':board_id};
 			   var headers = {"Content-Type" : "application/json"
@@ -176,8 +181,8 @@
 	   
    });
    
+   //게시글에 달린 모든 댓글들을 ajax를 통해 가져오는 함수(get요청)
    function showCommentList(){
-	console.log('실행');
 	var dataParam = {id:board_id};
 	member_id = '${member.id}'; 
 	   $.ajax({

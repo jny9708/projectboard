@@ -48,7 +48,7 @@ $(function(){
 
 function submitcheck() {
 	var title = $('input[name=title]').val();
-	var content = $('textarea[name=content]').text();
+	var content = $('textarea[name=content]').val();
 	if(title == ''||content ==''){
 		alert('제목 혹은 내용을 채워주세요.');
 		return false;
